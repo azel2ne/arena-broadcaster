@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+
+    <div class="controls-left">
+        <button id="resetBtn" class="btn danger">Clear Board</button>
+        <button id="showAllBtn" class="btn">Show All</button>
+        <button id="logoutBtn" class="btn hidden">Log Out</button>
+    </div>
+
+    <div id="trashZone" class="trash-zone hidden">
+        <div class="trash-can">
+            <div class="trash-lid"></div>
+            <div class="trash-body"></div>
+            <div class="trash-smoke">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="userTabsContainer" class="user-tabs"></div>
+
+    <div id="board" class="board"></div>
+
+    <div id="toolbar" class="toolbar hidden">
+        <button class="tool-btn" onclick="addText()" title="Add Text">
+            <span class="material-icons-round">text_fields</span>
+        </button>
+        <button class="tool-btn" onclick="openStickyModal()" title="Add Sticky Note">
+            <span class="material-icons-round">sticky_note_2</span>
+        </button>
+        <button class="tool-btn" onclick="triggerUpload('img')" title="Add Image">
+            <span class="material-icons-round">image</span>
+        </button>
+        <button class="tool-btn" onclick="triggerUpload('video')" title="Add Video">
+            <span class="material-icons-round">movie</span>
+        </button>
+        <button class="tool-btn" onclick="openLinkModal()" title="Add Link">
+            <span class="material-icons-round">link</span>
+        </button>
+    </div>
+
+    <input type="file" id="imgInput" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" style="display: none;">
+    <input type="file" id="videoInput" accept="video/*" style="display: none;">
+
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Who are you?</h2>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="usernameInput" placeholder="Enter username" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter password">
+            </div>
+            <p id="loginError" class="error-msg"></p>
+            <button id="loginBtn">Sign In</button>
+        </div>
+    </div>
+
+    <div id="stickyModal" class="modal-overlay hidden">
+        <div class="modal item-creation-modal">
+            <h3>New Sticky Note</h3>
+            
+            <div class="color-options">
+                <div class="color-option bg-yellow selected" onclick="selectStickyColor('yellow', this)"></div>
+                <div class="color-option bg-pink" onclick="selectStickyColor('pink', this)"></div>
+                <div class="color-option bg-blue" onclick="selectStickyColor('blue', this)"></div>
+                <div class="color-option bg-purple" onclick="selectStickyColor('purple', this)"></div>
+                <div class="color-option bg-green" onclick="selectStickyColor('green', this)"></div>
+                <div class="color-option bg-gray" onclick="selectStickyColor('gray', this)"></div>
+            </div>
+
+            <textarea id="stickyText" placeholder="Write something..." rows="4"></textarea>
+            
+            <div class="modal-actions">
+                <button class="btn danger" onclick="closeModal('stickyModal')">Cancel</button>
+                <button class="btn" onclick="confirmSticky()">Add Note</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="linkModal" class="modal-overlay hidden">
+        <div class="modal item-creation-modal">
+            <h3>Add Link</h3>
+            <div class="input-group">
+                <label>Title</label>
+                <input type="text" id="linkTitle" placeholder="e.g. Google">
+            </div>
+            <div class="input-group">
+                <label>URL</label>
+                <input type="text" id="linkUrl" placeholder="e.g. google.com">
+            </div>
+            <div class="modal-actions">
+                <button class="btn danger" onclick="closeModal('linkModal')">Cancel</button>
+                <button class="btn" onclick="confirmLink()">Add Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
