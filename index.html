@@ -6,6 +6,9 @@
     <title>Collaborative Board</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -69,7 +72,6 @@
     <div id="stickyModal" class="modal-overlay hidden">
         <div class="modal item-creation-modal">
             <h3>New Sticky Note</h3>
-            
             <div class="color-options">
                 <div class="color-option bg-yellow selected" onclick="selectStickyColor('yellow', this)"></div>
                 <div class="color-option bg-pink" onclick="selectStickyColor('pink', this)"></div>
@@ -78,9 +80,7 @@
                 <div class="color-option bg-green" onclick="selectStickyColor('green', this)"></div>
                 <div class="color-option bg-gray" onclick="selectStickyColor('gray', this)"></div>
             </div>
-
             <textarea id="stickyText" placeholder="Write something..." rows="4"></textarea>
-            
             <div class="modal-actions">
                 <button class="btn danger" onclick="closeModal('stickyModal')">Cancel</button>
                 <button class="btn" onclick="confirmSticky()">Add Note</button>
